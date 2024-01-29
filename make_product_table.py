@@ -21,19 +21,15 @@ except:
     pass 
     
 try:
-    os.remove("Database/detail.csv")
+    os.remove("Database/map_detail.csv")
 except:
     pass 
     
 try:
-    os.remove("Database/brand.csv")
+    os.remove("Database/map_brand.csv")
 except:
     pass 
-    
-try:
-    os.remove("Database/productmaster.csv")
-except:
-    pass 
+
     
 temp_product_query = '''
     select distinct *
@@ -88,19 +84,6 @@ brand_query = '''
     from "Database/temp_product.csv"
 '''
 
-product_query = '''
-    select distinct 
-        a.*,
-        "", 
-        b.fixed_category,
-        c.fixed_detail,
-        d.brand
-    from "Database/temp_product.csv" a
-    inner join "Database/map_category.csv" b on a.category = b.category
-    inner join "Database/detail.csv" c on a.detail = c.detail
-    inner join "Database/brand.csv" d on a.name = d.name
-'''
-
 if not os.path.exists('Database/temp_product.csv') or os.stat('Database/temp_product.csv').st_size == 0:
     with open('Database/temp_product.csv', 'w', newline='', encoding='utf-8') as outf:
         data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
@@ -111,20 +94,15 @@ if not os.path.exists('Database/map_category.csv') or os.stat('Database/map_cate
         data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
         data.writerow(['category', 'fixed_category'])
 
-if not os.path.exists('Database/detail.csv') or os.stat('Database/detail.csv').st_size == 0:
-    with open('Database/detail.csv', 'w', newline='', encoding='utf-8') as outf:
+if not os.path.exists('Database/map_detail.csv') or os.stat('Database/map_detail.csv').st_size == 0:
+    with open('Database/map_detail.csv', 'w', newline='', encoding='utf-8') as outf:
         data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
         data.writerow(['detail', 'fixed_detail'])  
 
-if not os.path.exists('Database/brand.csv') or os.stat('Database/brand.csv').st_size == 0:
-    with open('Database/brand.csv', 'w', newline='', encoding='utf-8') as outf:
+if not os.path.exists('Database/map_brand.csv') or os.stat('Database/map_brand.csv').st_size == 0:
+    with open('Database/map_brand.csv', 'w', newline='', encoding='utf-8') as outf:
         data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
         data.writerow(['name', 'brand'])
-
-if not os.path.exists('Database/product.csv') or os.stat('Database/product.csv').st_size == 0:
-    with open('Database/product.csv', 'w', newline='', encoding='utf-8') as outf:
-        data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
-        data.writerow(['id', 'name', 'price', 'originalprice', 'discountPercentage', 'detail', 'platform', 'category', 'scrapedate', 'seller', 'productmasterid', 'fixed_category', 'fixed_detail', 'brand'])          
 
 with open('Database/temp_product.csv', 'a', newline='', encoding='utf-8') as outf:
     data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
@@ -136,15 +114,34 @@ with open('Database/map_category.csv', 'a', newline='', encoding='utf-8') as out
     for row in cursor.execute(map_cat_query):
         data.writerow(row) 
         
-with open('Database/detail.csv', 'a', newline='', encoding='utf-8') as outf:
+with open('Database/map_detail.csv', 'a', newline='', encoding='utf-8') as outf:
     data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
     for row in cursor.execute(detail_query):
         data.writerow(row) 
         
-with open('Database/brand.csv', 'a', newline='', encoding='utf-8') as outf:
+with open('Database/map_brand.csv', 'a', newline='', encoding='utf-8') as outf:
     data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
     for row in cursor.execute(brand_query):
         data.writerow(row) 
+        
+        
+product_query = '''
+    select distinct 
+        a.*,
+        "", 
+        b.fixed_category,
+        c.fixed_detail,
+        d.brand
+    from "Database/temp_product.csv" a
+    inner join "Database/map_category.csv" b on a.category = b.category
+    inner join "Database/map_detail.csv" c on a.detail = c.detail
+    inner join "Database/map_brand.csv" d on a.name = d.name
+'''     
+
+if not os.path.exists('Database/product.csv') or os.stat('Database/product.csv').st_size == 0:
+    with open('Database/product.csv', 'w', newline='', encoding='utf-8') as outf:
+        data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
+        data.writerow(['id', 'name', 'price', 'originalprice', 'discountPercentage', 'detail', 'platform', 'category', 'scrapedate', 'seller', 'productmasterid', 'fixed_category', 'fixed_detail', 'brand'])             
 
 with open('Database/product.csv', 'a', newline='', encoding='utf-8') as outf:
     data = csv.writer(outf, quoting=csv.QUOTE_NONNUMERIC)
