@@ -19,6 +19,7 @@ The program runs multiple times in the following stages:
 3. Prediction
 
 DATA CRAWLING
+
 Open the Folder for the website that you want to scrape and run the code in the following order:
 *X is the vendor name
 1. python page_crawl_X.py
@@ -35,6 +36,7 @@ Open the Folder for the website that you want to scrape and run the code in the 
    - output: data.csv
   
 DATA PROCESSING
+
 Due to hardware limition, using localhost database is prohibited; therefore, shillelagh library is used to treat CSV as local database.
 Run the code in the following order:
 1. python data_converting.py
@@ -51,6 +53,7 @@ Run the code in the following order:
    - output: productmaster.csv (Database Folder)
   
 PREDICTION
+
 Using Random Forest Regressor to predict price based on 2 days data.
 Run the code in the following order:
 1. python predict_price.py
@@ -59,6 +62,7 @@ Run the code in the following order:
    - output: productrecommendation.csv (Database Folder)
 
 FUTURE IMPROVEMENT
+
 The project is done in less than 24 hours. Most of the time used to find an alternative solution due to inability to install apps.
 - Add Flagging in file name for data scraping to divide which file has been processed or not. This will also included in an additional parameter to fasten the process of scraping
 - If possible, finding the backend API for scraping data to make the progress faster instead of using selenium
