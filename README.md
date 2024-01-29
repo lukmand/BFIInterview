@@ -21,7 +21,7 @@ The program runs multiple times in the following stages:
 DATA CRAWLING
 
 Open the Folder for the website that you want to scrape and run the code in the following order:
-*X is the vendor name
+\n*X is the vendor name
 1. python page_crawl_X.py
    - desc: Scrape the html or API for vendor pages
    - parameter: None
@@ -38,7 +38,7 @@ Open the Folder for the website that you want to scrape and run the code in the 
 DATA PROCESSING
 
 Due to hardware limition, using localhost database is prohibited; therefore, shillelagh library is used to treat CSV as local database.
-Run the code in the following order:
+\nRun the code in the following order:
 1. python data_converting.py
    - desc: the program is to convert the CSV in all vendor folder into a suitable database in Database folder
    - parameter: None
@@ -55,7 +55,7 @@ Run the code in the following order:
 PREDICTION
 
 Using Random Forest Regressor to predict price based on 2 days data.
-Run the code in the following order:
+\nRun the code in the following order:
 1. python predict_price.py
    - desc: predict the price using Machine Learning. Applying one hot encoder to categorical sample.
    - parameter: None
