@@ -42,6 +42,25 @@ Run the code in the following order:
    - parameter: None
    - output: source_X.csv file in Database folder
 2. python make_product_table.py
-   - desc: Using the source_X.csv in the Database folder to Data Engineer a suitable table for ML purposes
-   - parameter None
-   - output: M
+   - desc: Using the source_X.csv in the Database folder to create thesaurus and ontology.
+   - parameter: None
+   - output: temp_product.csv, product.csv, map_brand.csv, map_detail.csv, map_category.csv (Database Folder)
+3. python make_productmaster.py
+   - desc: Create productmaster table with sample suitable for ML
+   - parameter: None
+   - output: productmaster.csv (Database Folder)
+  
+PREDICTION
+Using Random Forest Regressor to predict price based on 2 days data.
+Run the code in the following order:
+1. python predict_price.py
+   - desc: predict the price using Machine Learning. Applying one hot encoder to categorical sample.
+   - parameter: None
+   - output: productrecommendation.csv (Database Folder)
+
+FUTURE IMPROVEMENT
+The project is done in less than 24 hours. Most of the time used to find an alternative solution due to inability to install apps.
+- Add Flagging in file name for data scraping to divide which file has been processed or not. This will also included in an additional parameter to fasten the process of scraping
+- If possible, finding the backend API for scraping data to make the progress faster instead of using selenium
+- Implement localhost database
+- Create a real and accurate relational database structure
